@@ -18,21 +18,54 @@ public class VendingMachineCLI {
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
+		
+		//snackStockMap.snackStock(getAllSnacks(), 5);
 	}
-
+	
 	public void run() {
-		while (true) {
+			while (true) {
 			System.out.println("*********");
 			System.out.println("MAIN MENU");
 			System.out.println("*********");
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
+				displayFullMenu();
 				// display vending machine items
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+				displayPurchaseMenu();
 				// do purchase
+			} else if (choice.contentEquals(MAIN_MENU_OPTION_EXIT)) {
+				System.out.println("Have a nice day!");
 			}
 		}
+	}
+	
+	public void displayFullMenu() {
+		String menuSelection = "";
+		System.out.println(/*Print the full menu*/);
+			if (menuSelection.equals("Purchase")) {
+				displayPurchaseMenu();
+			}else if (menuSelection.equals("EXIT")) {
+				System.out.println("Have a nice day!");
+			}
+
+	}
+	
+	public void displayPurchaseMenu() {
+		String purchaseMenuOption = "";
+		
+	}
+	
+	public void displayFeedMoneyMenu() {
+		
+	}
+	
+	public void displaySelectedProductMenu() {
+		//Requires dispense messages
+	}
+	
+	public void displayFinishTransactionMenu() {
+		
 	}
 
 	public static void main(String[] args) {
@@ -40,4 +73,9 @@ public class VendingMachineCLI {
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
 	}
+	
+	
+	//Purchase Action
+	//Dispense Items: prints the item name, cost and money remaining.  Also returns message
+	//After product is dispensed, machine updates balance and returns customer to the Purchase menu
 }
