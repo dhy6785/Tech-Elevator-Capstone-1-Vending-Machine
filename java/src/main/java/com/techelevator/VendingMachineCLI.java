@@ -89,7 +89,14 @@ public class VendingMachineCLI {
 
 	public void displayPurchaseMenu() {
 		String purchaseMenuOption = "";
-
+			if(purchaseMenuOption.equals("Feed Money")) {
+				displayFeedMoneyMenu();
+			}else if (purchaseMenuOption.equals("Select Product")) {
+				displaySelectedProductMenu();
+			}else if (purchaseMenuOption.equals("Finish Transaction")) {
+				displayFinishTransactionMenu();
+			}
+		
 	}
 
 	public void displayFeedMoneyMenu() {
