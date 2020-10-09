@@ -27,7 +27,7 @@ public class VendingMachineCLI {
 	//	private static final String[] TRANSACTION_COMPLETE_MENU = {"Thank you for your purchase"};
 
 	private Menu menu;
-	private Menu purchaseMenu;
+	private static Menu purchaseMenu;
 
 	public VendingMachineCLI(Menu menu, Menu purchaseMenu) {
 		this.menu = menu;
@@ -37,8 +37,17 @@ public class VendingMachineCLI {
 	
 	
 	public List<String[]> readInventory(String filePath) throws FileNotFoundException{
+		
 		File inventoryCSV = new File(filePath);
 		List<String[]> snackSupply =  new ArrayList<>();
+		
+		if (inventoryCSV.exists() == false) {
+			System.out.println("File does not exist");
+			System.exit(1);
+		} else if (inventoryCSV.isFile() == false) {
+			System.out.println("Input is not a file");
+		}
+		
 		try(Scanner inventoryReader = new Scanner(inventoryCSV)) {
 			
 			while(inventoryReader.hasNextLine()) {
@@ -55,10 +64,7 @@ public class VendingMachineCLI {
 		
 		String path = "vendingmachine.csv";
 		List<String[]> readItems = readInventory(path);
-		// make sure file exists
-		
-		
-		
+				
 		while (true) {
 			System.out.println("*********");
 			System.out.println("MAIN MENU");
@@ -76,15 +82,15 @@ public class VendingMachineCLI {
 		}
 	}
 
-//	public void displayFullMenu() {
-//		String menuSelection = "";
-//		System.out.println(/*Print the full menu*/);
-//		if (menuSelection.equals("Purchase")) {
-//			displayPurchaseMenu();
-//		}else if (menuSelection.equals("EXIT")) {
-//			System.out.println("Have a nice day!");
-//		}
-
+	public void displayFullMenu() {
+		String menuSelection = "";
+		System.out.println(/*Print the full menu*/);
+		if (menuSelection.equals("Purchase")) {
+			displayPurchaseMenu();
+		}else if (menuSelection.equals("EXIT")) {
+			System.out.println("Have a nice day!");
+		}
+	}
 	
 
 	public void displayPurchaseMenu() {
@@ -111,9 +117,9 @@ public class VendingMachineCLI {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		Menu menu = new Menu(System.in, System.out);
-		VendingMachineCLI cli = new VendingMachineCLI(menu);
+		VendingMachineCLI cli = new VendingMachineCLI(menu, purchaseMenu);
 		cli.run();
 	}
 

@@ -2,20 +2,46 @@ package com.techelevator;
 
 public class Transaction {
 
-	int quarters = 0;
-	int dimes = 0;
-	int nickels = 0;
+	private double moneyProvided;
+	private int quarter = 25;
+	private int dime = 10;
+	private int nickel = 5;
+	private double balance;
+	private double totalCost;
 	
-	//Getters
-	public int getQuarters() {
-		return quarters;
+	public double addMoney(double amountTendered) {
+		balance += amountTendered;
+		return balance;
 	}
-	public int getDimes() {
-		return dimes;
+	
+	public double balance() {
+		return balance;
 	}
-	public int getNickels() {
-		return nickels;
+	
+	public void totalCost(double cost) {
+		balance -= cost;
 	}
+	
+	int counterQuarter = 0;
+	int counterDime = 0;
+	int counterNickel = 0;
+	
+	public void makeChange() {
+		while (balance >= 25) {
+			balance -= 25;
+			counterQuarter++;
+		}
+		while (balance >= 10) {
+			balance -= 10;
+			counterDime++;
+		}
+		while (balance >= 5) {
+			balance -= 5;
+			counterNickel++;
+		}
+		
+	}
+	
 	
 	
 }

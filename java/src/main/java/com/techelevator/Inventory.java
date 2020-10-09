@@ -12,15 +12,13 @@ public class Inventory {
 		
 		for(int i = 0; i < input.size(); i++) {
 		snackStockMap.put(input.get(i), stock);
+		}
 		
-	}
 		return snackStockMap;
-	}
+		}
 	
 	public Integer removeSnack(String input, int stock) {
-		
 		return snackStockMap.put(input, stock - 1);
-		
 	}
 	
 	public Map<String, Integer> snacksLeft(String input, int stock) {
