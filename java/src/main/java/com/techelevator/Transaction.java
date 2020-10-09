@@ -1,7 +1,7 @@
 package com.techelevator;
 
-public class MakeChange {
-	
+public class Transaction {
+
 	int quarters = 0;
 	int dimes = 0;
 	int nickels = 0;
@@ -18,5 +18,4 @@ public class MakeChange {
 	}
 	
 	
-
 }
