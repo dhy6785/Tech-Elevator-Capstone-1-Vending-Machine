@@ -21,6 +21,7 @@ public class MenuItems {
 	private double snackPrice;
 	private String snackType;
 	private int count;
+	
 
 	//Getters
 	public String getSnackID() {

@@ -26,62 +26,75 @@ public class VendingMachineCLI {
 	//	private static final String[] SELECT_PRODUCT_MENU = {"Return to Main Menu"};
 	//	private static final String[] TRANSACTION_COMPLETE_MENU = {"Thank you for your purchase"};
 
-	private Menu menu;
+	private Menu mainMenu;
 	private static Menu purchaseMenu;
 
-	public VendingMachineCLI(Menu menu, Menu purchaseMenu) {
-		this.menu = menu;
+	public VendingMachineCLI(Menu mainMenu, Menu purchaseMenu) {
+		this.mainMenu = mainMenu;
 		this.purchaseMenu = purchaseMenu;
 	}
 
-	
-	
-	public List<String[]> readInventory(String filePath) throws FileNotFoundException{
-		
+
+	public List<MenuItems> readInventory(String filePath) throws FileNotFoundException{
+
 		File inventoryCSV = new File(filePath);
-		List<String[]> snackSupply =  new ArrayList<>();
-		
+		List<MenuItems> snackSupply =  new ArrayList<>();
+
 		if (inventoryCSV.exists() == false) {
 			System.out.println("File does not exist");
 			System.exit(1);
 		} else if (inventoryCSV.isFile() == false) {
 			System.out.println("Input is not a file");
 		}
-		
+
 		try(Scanner inventoryReader = new Scanner(inventoryCSV)) {
-			
+
 			while(inventoryReader.hasNextLine()) {
-				
+
 				String line = inventoryReader.nextLine();
 				String[] item = line.split("\\|");
-				snackSupply.add(item);
+				MenuItems product = new MenuItems(item[0], item[1], Double.parseDouble(item [2]), item [3]);
+				snackSupply.add(product);
 			}
 		}
 		return snackSupply;
 	}
+
 	
 	public void run() throws FileNotFoundException {
-		
+
 		String path = "vendingmachine.csv";
-		List<String[]> readItems = readInventory(path);
-				
-		while (true) {
+		List<MenuItems> readItems = readInventory(path);
+
+		boolean isRunning = true;
+		while (isRunning) {
 			System.out.println("*********");
 			System.out.println("MAIN MENU");
 			System.out.println("*********");
-			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+			String choice = (String) mainMenu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-//				displayFullMenu();
-				// display vending machine items
+
+				printInventory(readItems);
+
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				displayPurchaseMenu();
 				// do purchase
 			} else if (choice.contentEquals(MAIN_MENU_OPTION_EXIT)) {
+				isRunning = false;
 				System.out.println("Have a nice day!");
 			}
 		}
 	}
 
+	private static void printInventory(List<MenuItems> snackSupply) {
+
+		for(MenuItems snack : snackSupply) {
+			System.out.println(snack.getSnackID() + " " + snack.getSnackName() + " " + snack.getSnackPrice() + "  " + snack.getSnackType());
+		}
+
+	}
+
+	
 	public void displayFullMenu() {
 		String menuSelection = "";
 		System.out.println(/*Print the full menu*/);
@@ -91,32 +104,36 @@ public class VendingMachineCLI {
 			System.out.println("Have a nice day!");
 		}
 	}
-	
+
 
 	public void displayPurchaseMenu() {
 		String purchaseMenuOption = "";
-			if(purchaseMenuOption.equals("Feed Money")) {
-				displayFeedMoneyMenu();
-			}else if (purchaseMenuOption.equals("Select Product")) {
-				displaySelectedProductMenu();
-			}else if (purchaseMenuOption.equals("Finish Transaction")) {
-				displayFinishTransactionMenu();
-			}
-		
+		if(purchaseMenuOption.equals("Feed Money")) {
+			displayFeedMoneyMenu();
+		}else if (purchaseMenuOption.equals("Select Product")) {
+			displaySelectedProductMenu();
+		}else if (purchaseMenuOption.equals("Finish Transaction")) {
+			displayFinishTransactionMenu();
+		}
+
 	}
 
+	
 	public void displayFeedMoneyMenu() {
 
 	}
 
+	
 	public void displaySelectedProductMenu() {
 		//Requires dispense messages
 	}
 
+	
 	public void displayFinishTransactionMenu() {
 
 	}
 
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu, purchaseMenu);
