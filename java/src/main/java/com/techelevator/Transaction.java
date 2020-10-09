@@ -9,6 +9,10 @@ public class Transaction {
 	private double balance;
 	private double totalCost;
 	
+	public Transaction() {
+		
+	}
+	
 	public double addMoney(double amountTendered) {
 		balance += amountTendered;
 		return balance;

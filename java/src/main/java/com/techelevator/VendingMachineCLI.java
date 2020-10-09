@@ -73,11 +73,21 @@ public class VendingMachineCLI {
 			System.out.println("*********");
 			String choice = (String) mainMenu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-
 				printInventory(readItems);
 
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				displayPurchaseMenu();
+				Transaction customerTransaction = new Transaction();
+				while(true) {
+					String purchaseChoice = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+						//getMoneyFromUser();
+					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+						
+					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+						
+					}
+				}
+				//getChoiceFromOptions();
 				// do purchase
 			} else if (choice.contentEquals(MAIN_MENU_OPTION_EXIT)) {
 				isRunning = false;
@@ -89,49 +99,39 @@ public class VendingMachineCLI {
 	private static void printInventory(List<MenuItems> snackSupply) {
 
 		for(MenuItems snack : snackSupply) {
-			System.out.println(snack.getSnackID() + " " + snack.getSnackName() + " " + snack.getSnackPrice() + "  " + snack.getSnackType());
+			System.out.println(snack.getSnackID() + " " + snack.getSnackName() + " " + snack.getSnackPrice() + "  " + snack.getSnackType() + " | In Stock: " + snack.getCount());
 		}
 
 	}
 
 	
-	public void displayFullMenu() {
-		String menuSelection = "";
-		System.out.println(/*Print the full menu*/);
-		if (menuSelection.equals("Purchase")) {
-			displayPurchaseMenu();
-		}else if (menuSelection.equals("EXIT")) {
-			System.out.println("Have a nice day!");
-		}
-	}
 
-
-	public void displayPurchaseMenu() {
-		String purchaseMenuOption = "";
-		if(purchaseMenuOption.equals("Feed Money")) {
-			displayFeedMoneyMenu();
-		}else if (purchaseMenuOption.equals("Select Product")) {
-			displaySelectedProductMenu();
-		}else if (purchaseMenuOption.equals("Finish Transaction")) {
-			displayFinishTransactionMenu();
-		}
-
-	}
-
-	
-	public void displayFeedMoneyMenu() {
-
-	}
-
-	
-	public void displaySelectedProductMenu() {
-		//Requires dispense messages
-	}
-
-	
-	public void displayFinishTransactionMenu() {
-
-	}
+//	public void displayPurchaseMenu() {
+//		String purchaseMenuOption = "";
+//		if(purchaseMenuOption.equals("Feed Money")) {
+//			displayFeedMoneyMenu();
+//		}else if (purchaseMenuOption.equals("Select Product")) {
+//			displaySelectedProductMenu();
+//		}else if (purchaseMenuOption.equals("Finish Transaction")) {
+//			displayFinishTransactionMenu();
+//		}
+//
+//	}
+//
+//	
+//	public void displayFeedMoneyMenu() {
+//
+//	}
+//
+//	
+//	public void displaySelectedProductMenu() {
+//		//Requires dispense messages
+//	}
+//
+//	
+//	public void displayFinishTransactionMenu() {
+//
+//	}
 
 	
 	public static void main(String[] args) throws FileNotFoundException {
@@ -140,8 +140,4 @@ public class VendingMachineCLI {
 		cli.run();
 	}
 
-
-	//Purchase Action
-	//Dispense Items: prints the item name, cost and money remaining.  Also returns message
-	//After product is dispensed, machine updates balance and returns customer to the Purchase menu
 }
