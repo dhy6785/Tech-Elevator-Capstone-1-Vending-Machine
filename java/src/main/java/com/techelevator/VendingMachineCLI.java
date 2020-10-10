@@ -22,16 +22,18 @@ public class VendingMachineCLI {
 	private static final String PURCHASE_MENU_OPTION_FINISH_TRANSACTION = "Finish Transaction";
 	private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
 
-	//	private static final String[] PAY_OPTIONS = {"$1 Bill", "$2 Bill", "$5 Bill", "$10 Bill", "Return to Main Menu"};
-	//	private static final String[] SELECT_PRODUCT_MENU = {"Return to Main Menu"};
+	private static final String FEED_ONE_DOLLAR = "$1 Bill";
+	private static final String FEED_TWO_DOLLARS = "$2 Bill"; 
+	private static final String FEED_FIVE_DOLLARS ="$5 Bill";
+	private static final String FEED_TEN_DOLLARS = "$10 Bill";
+	private static final String[] FEED_MENU_OPTIONS = {FEED_ONE_DOLLAR, FEED_TWO_DOLLARS, FEED_FIVE_DOLLARS, FEED_TEN_DOLLARS};
+	private static final String[] SELECT_PRODUCT_MENU = {"Return to Main Menu"};
 	//	private static final String[] TRANSACTION_COMPLETE_MENU = {"Thank you for your purchase"};
 
-	private Menu mainMenu;
-	private static Menu purchaseMenu;
-
-	public VendingMachineCLI(Menu mainMenu, Menu purchaseMenu) {
-		this.mainMenu = mainMenu;
-		this.purchaseMenu = purchaseMenu;
+	private Menu menu;
+		
+	public VendingMachineCLI(Menu menu) {
+		this.menu = menu;
 	}
 
 
@@ -65,30 +67,51 @@ public class VendingMachineCLI {
 
 		String path = "vendingmachine.csv";
 		List<MenuItems> readItems = readInventory(path);
-
+		Scanner productScanner = new Scanner(System.in);
+		
 		boolean isRunning = true;
 		while (isRunning) {
 			System.out.println("*********");
 			System.out.println("MAIN MENU");
 			System.out.println("*********");
-			String choice = (String) mainMenu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				printInventory(readItems);
 
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				Transaction customerTransaction = new Transaction();
 				while(true) {
-					String purchaseChoice = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					
 					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-						//getMoneyFromUser();
+						String feedChoice = (String) menu.getChoiceFromOptions(FEED_MENU_OPTIONS);
+						if (feedChoice.equals(FEED_ONE_DOLLAR)) {
+							customerTransaction.addMoney(1);
+							System.out.println(customerTransaction.balance());
+							
+						}else if (feedChoice.equals(FEED_TWO_DOLLARS)) {
+							customerTransaction.addMoney(2);
+							System.out.println(customerTransaction.balance());
+							
+						}else if (feedChoice.equals(FEED_FIVE_DOLLARS)) {
+							customerTransaction.addMoney(5);
+							System.out.println(customerTransaction.balance());
+							
+						}else if (feedChoice.equals(FEED_TEN_DOLLARS)) {
+							customerTransaction.addMoney(10);
+							System.out.println(customerTransaction.balance());
+						}
+						
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+						printInventory(readItems);
+						String productChoice = productScanner.nextLine();
+						
 						
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 						
 					}
 				}
-				//getChoiceFromOptions();
-				// do purchase
+			
 			} else if (choice.contentEquals(MAIN_MENU_OPTION_EXIT)) {
 				isRunning = false;
 				System.out.println("Have a nice day!");
@@ -106,37 +129,12 @@ public class VendingMachineCLI {
 
 	
 
-//	public void displayPurchaseMenu() {
-//		String purchaseMenuOption = "";
-//		if(purchaseMenuOption.equals("Feed Money")) {
-//			displayFeedMoneyMenu();
-//		}else if (purchaseMenuOption.equals("Select Product")) {
-//			displaySelectedProductMenu();
-//		}else if (purchaseMenuOption.equals("Finish Transaction")) {
-//			displayFinishTransactionMenu();
-//		}
-//
-//	}
-//
-//	
-//	public void displayFeedMoneyMenu() {
-//
-//	}
-//
-//	
-//	public void displaySelectedProductMenu() {
-//		//Requires dispense messages
-//	}
-//
-//	
-//	public void displayFinishTransactionMenu() {
-//
-//	}
+
 
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		Menu menu = new Menu(System.in, System.out);
-		VendingMachineCLI cli = new VendingMachineCLI(menu, purchaseMenu);
+		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
 	}
 
