@@ -45,11 +45,11 @@ public class Transaction {
 			else if (balance >= .05) {
 				balance -= .05;
 				counterNickel++;
-			} else if (balance == 0.00) {
+			} else if (balance < .05) {
 				break;
 			}
 		}
-		System.out.printf("Your remaining balance is now " + "%.2f", balance);
+		System.out.printf("Your remaining balance: $" + "%.2f", balance);
 		System.out.println("\nHere is your change:");
 		System.out.println("Quarters: " + counterQuarter);
 		System.out.println("Dimes: " + counterDime);

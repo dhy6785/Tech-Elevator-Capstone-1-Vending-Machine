@@ -39,7 +39,10 @@ public class MenuItems {
 	public int getCount() {
 		return count;
 	}
-	
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 	
 	public MenuItems(String snackID, String snackName, double snackPrice, String snackType) {
 		this.snackID = snackID;

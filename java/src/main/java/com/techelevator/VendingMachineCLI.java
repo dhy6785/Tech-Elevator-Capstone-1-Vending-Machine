@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,13 +29,13 @@ public class VendingMachineCLI {
 	private static final String FEED_FIVE_DOLLARS ="$5 Bill";
 	private static final String FEED_TEN_DOLLARS = "$10 Bill";
 	private static final String[] FEED_MENU_OPTIONS = {FEED_ONE_DOLLAR, FEED_TWO_DOLLARS, FEED_FIVE_DOLLARS, FEED_TEN_DOLLARS};
-//	private static final String[] SELECT_PRODUCT_MENU = {"Return to Main Menu"};
+	//	private static final String[] SELECT_PRODUCT_MENU = {"Return to Main Menu"};
 	//	private static final String[] TRANSACTION_COMPLETE_MENU = {"Thank you for your purchase"};
 
 	private Menu menu;
 	Scanner productScanner = new Scanner(System.in);
 	Transaction customerTransaction = new Transaction();
-	
+
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
@@ -64,7 +66,7 @@ public class VendingMachineCLI {
 		return snackSupply;
 	}
 
-	
+
 	public void run() throws FileNotFoundException {
 
 		String path = "vendingmachine.csv";
@@ -85,40 +87,46 @@ public class VendingMachineCLI {
 					System.out.println("\n*************");
 					System.out.println("PURCHASE MENU");
 					System.out.println("*************");
+
+					
 					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+
 					
 					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 						String feedChoice = (String) menu.getChoiceFromOptions(FEED_MENU_OPTIONS);
 						if (feedChoice.equals(FEED_ONE_DOLLAR)) {
 							customerTransaction.addMoney(1);
-							System.out.printf("\nTotal Balance: $" + "%.2f", customerTransaction.balance());
-							
+
+
 						}else if (feedChoice.equals(FEED_TWO_DOLLARS)) {
 							customerTransaction.addMoney(2);
-							System.out.printf("Total Balance: $" + "%.2f", customerTransaction.balance());
-							
+
+
 						}else if (feedChoice.equals(FEED_FIVE_DOLLARS)) {
 							customerTransaction.addMoney(5);
-							System.out.printf("Total Balance: $" + "%.2f", customerTransaction.balance());
-							
+
+
 						}else if (feedChoice.equals(FEED_TEN_DOLLARS)) {
 							customerTransaction.addMoney(10);
-							System.out.printf("Total Balance: $" + "%.2f", customerTransaction.balance());
+
 						}
-						
+
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-						
+
 						printInventory(readItems);
 						productSelect(readItems);
 
-						
+
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-						
+
 						customerTransaction.makeChange();
-						// Infinite loop at the moment. Have to fix
+						break;
 					}
+					
 				}
-			
+
+				
+				
 			} else if (choice.contentEquals(MAIN_MENU_OPTION_EXIT)) {
 				isRunning = false;
 				System.out.println("Have a nice day!");
@@ -135,37 +143,60 @@ public class VendingMachineCLI {
 	}
 
 	private void productSelect(List<MenuItems> snackSupply) {
-		
+
 		System.out.print("\nPlease select product ID >>> ");
 		String productChoice = productScanner.nextLine();
-		
+
 		for(MenuItems snack : snackSupply) {
 
-			if(snack != null && snack.getSnackID().equalsIgnoreCase(productChoice)) {
-				
-				System.out.println("You have chosen: " + snack.getSnackName());
-				
-				if(snack.getSnackType().equals("Candy")) {
-					System.out.println(Candy.dispenseMessage());
-				} else if(snack.getSnackType().equals("Chip")) {
-					System.out.println(Chip.dispenseMessage());
-				} else if(snack.getSnackType().equals("Gum")) {
-					System.out.println(Gum.dispenseMessage());
-				} else if(snack.getSnackType().equals("Drink")) {
-					System.out.println(Drink.dispenseMessage());
+			if(snack.getSnackID().equalsIgnoreCase(productChoice)) {
+
+				if(snack.getSnackPrice() > customerTransaction.balance()) {
+					System.out.println("Feed more money.");
+					break;
 				}
 				
-				customerTransaction.totalCost(snack.getSnackPrice());
-				System.out.printf("Remaining balance: " + "%.2f", customerTransaction.balance());
-				
+				if(snack.getCount() == 0) {
+					System.out.println("Item out of stock.");
+					
+				} else if(snack.getCount() > 0) {
+					
+					int previousCount = snack.getCount();
+					snack.setCount(previousCount - 1);
+
+					System.out.println("You have chosen: " + snack.getSnackName());
+
+					if(snack.getSnackType().equals("Candy")) {
+						System.out.println(Candy.dispenseMessage());
+					} else if(snack.getSnackType().equals("Chip")) {
+						System.out.println(Chip.dispenseMessage());
+					} else if(snack.getSnackType().equals("Gum")) {
+						System.out.println(Gum.dispenseMessage());
+					} else if(snack.getSnackType().equals("Drink")) {
+						System.out.println(Drink.dispenseMessage());
+					}
+					
+					customerTransaction.totalCost(snack.getSnackPrice());
+
+					System.out.printf("Remaining balance: $" + "%.2f", customerTransaction.balance());
+					
+
+				}
+			} else {
+				System.out.println("Product ID does not exist.");
+				break;
 			}
 		}
 	}
-	
+
+//	public static void auditlog(String message) throws Exception {
+//		try(PurchaseLog log = new PurchaseLog("Log.txt")) {
+//			log.write(LocalDate.now() + " " + LocalTime.now() + " " + message);
+//		}
+//	}
 
 
 
-	
 	public static void main(String[] args) throws FileNotFoundException {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);

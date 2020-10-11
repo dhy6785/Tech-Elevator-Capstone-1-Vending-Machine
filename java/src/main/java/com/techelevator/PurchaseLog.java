@@ -11,6 +11,10 @@ public class PurchaseLog {
 	String path = "Log.txt";
 	File audit = new File(path);
 	
+	public PurchaseLog() {
+		
+	}
+	
 	public void snackEntry(String snackName, String snackID, String cost, String balance) throws FileNotFoundException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();

@@ -5,6 +5,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import com.techelevator.Transaction;
+
 public class Menu {
 
 	private PrintWriter out;
@@ -18,12 +20,15 @@ public class Menu {
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
+			
 			displayMenuOptions(options);
 			choice = getChoiceFromUserInput(options);
 		}
 		return choice;
 	}
 
+
+	
 	public Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
 		String userInput = in.nextLine();
