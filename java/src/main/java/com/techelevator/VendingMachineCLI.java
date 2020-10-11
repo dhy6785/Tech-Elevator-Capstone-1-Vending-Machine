@@ -115,7 +115,7 @@ public class VendingMachineCLI {
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 						
 						customerTransaction.makeChange();
-						
+						// Infinite loop at the moment. Have to fix
 					}
 				}
 			
