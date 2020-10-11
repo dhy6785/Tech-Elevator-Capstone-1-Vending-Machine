@@ -27,11 +27,13 @@ public class VendingMachineCLI {
 	private static final String FEED_FIVE_DOLLARS ="$5 Bill";
 	private static final String FEED_TEN_DOLLARS = "$10 Bill";
 	private static final String[] FEED_MENU_OPTIONS = {FEED_ONE_DOLLAR, FEED_TWO_DOLLARS, FEED_FIVE_DOLLARS, FEED_TEN_DOLLARS};
-	private static final String[] SELECT_PRODUCT_MENU = {"Return to Main Menu"};
+//	private static final String[] SELECT_PRODUCT_MENU = {"Return to Main Menu"};
 	//	private static final String[] TRANSACTION_COMPLETE_MENU = {"Thank you for your purchase"};
 
 	private Menu menu;
-		
+	Scanner productScanner = new Scanner(System.in);
+	Transaction customerTransaction = new Transaction();
+	
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
@@ -67,11 +69,10 @@ public class VendingMachineCLI {
 
 		String path = "vendingmachine.csv";
 		List<MenuItems> readItems = readInventory(path);
-		Scanner productScanner = new Scanner(System.in);
-		
+
 		boolean isRunning = true;
 		while (isRunning) {
-			System.out.println("*********");
+			System.out.println("\n*********");
 			System.out.println("MAIN MENU");
 			System.out.println("*********");
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
@@ -79,35 +80,41 @@ public class VendingMachineCLI {
 				printInventory(readItems);
 
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				Transaction customerTransaction = new Transaction();
+
 				while(true) {
+					System.out.println("\n*************");
+					System.out.println("PURCHASE MENU");
+					System.out.println("*************");
 					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 					
 					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 						String feedChoice = (String) menu.getChoiceFromOptions(FEED_MENU_OPTIONS);
 						if (feedChoice.equals(FEED_ONE_DOLLAR)) {
 							customerTransaction.addMoney(1);
-							System.out.println(customerTransaction.balance());
+							System.out.printf("\nTotal Balance: $" + "%.2f", customerTransaction.balance());
 							
 						}else if (feedChoice.equals(FEED_TWO_DOLLARS)) {
 							customerTransaction.addMoney(2);
-							System.out.println(customerTransaction.balance());
+							System.out.printf("Total Balance: $" + "%.2f", customerTransaction.balance());
 							
 						}else if (feedChoice.equals(FEED_FIVE_DOLLARS)) {
 							customerTransaction.addMoney(5);
-							System.out.println(customerTransaction.balance());
+							System.out.printf("Total Balance: $" + "%.2f", customerTransaction.balance());
 							
 						}else if (feedChoice.equals(FEED_TEN_DOLLARS)) {
 							customerTransaction.addMoney(10);
-							System.out.println(customerTransaction.balance());
+							System.out.printf("Total Balance: $" + "%.2f", customerTransaction.balance());
 						}
 						
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-						printInventory(readItems);
-						String productChoice = productScanner.nextLine();
 						
+						printInventory(readItems);
+						productSelect(readItems);
+
 						
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+						
+						customerTransaction.makeChange();
 						
 					}
 				}
@@ -127,6 +134,33 @@ public class VendingMachineCLI {
 
 	}
 
+	private void productSelect(List<MenuItems> snackSupply) {
+		
+		System.out.print("\nPlease select product ID >>> ");
+		String productChoice = productScanner.nextLine();
+		
+		for(MenuItems snack : snackSupply) {
+
+			if(snack != null && snack.getSnackID().equalsIgnoreCase(productChoice)) {
+				
+				System.out.println("You have chosen: " + snack.getSnackName());
+				
+				if(snack.getSnackType().equals("Candy")) {
+					System.out.println(Candy.dispenseMessage());
+				} else if(snack.getSnackType().equals("Chip")) {
+					System.out.println(Chip.dispenseMessage());
+				} else if(snack.getSnackType().equals("Gum")) {
+					System.out.println(Gum.dispenseMessage());
+				} else if(snack.getSnackType().equals("Drink")) {
+					System.out.println(Drink.dispenseMessage());
+				}
+				
+				customerTransaction.totalCost(snack.getSnackPrice());
+				System.out.printf("Remaining balance: " + "%.2f", customerTransaction.balance());
+				
+			}
+		}
+	}
 	
 
 
@@ -137,5 +171,4 @@ public class VendingMachineCLI {
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
 	}
-
 }

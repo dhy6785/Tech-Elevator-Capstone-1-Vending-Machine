@@ -10,7 +10,7 @@ public class Gum extends MenuItems {
 		
 	}
 
-	public String dispenseMessage() {
+	public static String dispenseMessage() {
 		return "Chew, Chew, Yum!";
 	}
 	

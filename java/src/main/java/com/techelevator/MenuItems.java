@@ -48,6 +48,7 @@ public class MenuItems {
 		this.snackType = snackType;
 		this.count = 5;
 	}
+	
 
 	public String soldOut() {
 		String soldOut = "";

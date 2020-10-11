@@ -10,7 +10,7 @@ public class Candy extends MenuItems {
 
 	}
 
-	public String dispenseMessage() {
+	public static String dispenseMessage() {
 		return "Munch, Munch, Yum!";
 	}
 	

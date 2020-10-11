@@ -10,7 +10,7 @@ public class Drink extends MenuItems {
 
 	}
 
-	public String dispenseMessage() {
+	public static String dispenseMessage() {
 		return "Glug, Glug, Yum!";
 	}
 	
