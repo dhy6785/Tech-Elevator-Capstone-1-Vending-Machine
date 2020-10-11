@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class VendingMachineCLI {
 	private Menu menu;
 	Scanner productScanner = new Scanner(System.in);
 	Transaction customerTransaction = new Transaction();
+	PurchaseLog pLog = new PurchaseLog();
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -87,28 +89,48 @@ public class VendingMachineCLI {
 					System.out.println("\n*************");
 					System.out.println("PURCHASE MENU");
 					System.out.println("*************");
-
 					
 					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
-
+					
 					
 					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 						String feedChoice = (String) menu.getChoiceFromOptions(FEED_MENU_OPTIONS);
 						if (feedChoice.equals(FEED_ONE_DOLLAR)) {
 							customerTransaction.addMoney(1);
+							System.out.printf("Current Money Provided: " + "$%.2f", customerTransaction.balance());
+							try {
+								pLog.cashEntry("1.00", customerTransaction.balance());
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 
 						}else if (feedChoice.equals(FEED_TWO_DOLLARS)) {
 							customerTransaction.addMoney(2);
-
+							System.out.printf("Current Money Provided: " + "$%.2f", customerTransaction.balance());
+							try {
+								pLog.cashEntry("2.00", customerTransaction.balance());
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						}else if (feedChoice.equals(FEED_FIVE_DOLLARS)) {
 							customerTransaction.addMoney(5);
-
+							System.out.printf("Current Money Provided: " + "$%.2f", customerTransaction.balance());
+							try {
+								pLog.cashEntry("5.00", customerTransaction.balance());
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						}else if (feedChoice.equals(FEED_TEN_DOLLARS)) {
 							customerTransaction.addMoney(10);
-
+							System.out.printf("Current Money Provided: " + "$%.2f", customerTransaction.balance());
+							try {
+								pLog.cashEntry("10.00", customerTransaction.balance());
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
@@ -147,6 +169,7 @@ public class VendingMachineCLI {
 		System.out.print("\nPlease select product ID >>> ");
 		String productChoice = productScanner.nextLine();
 
+
 		for(MenuItems snack : snackSupply) {
 
 			if(snack.getSnackID().equalsIgnoreCase(productChoice)) {
@@ -155,12 +178,13 @@ public class VendingMachineCLI {
 					System.out.println("Feed more money.");
 					break;
 				}
-				
+
 				if(snack.getCount() == 0) {
 					System.out.println("Item out of stock.");
-					
+					//					break;
+
 				} else if(snack.getCount() > 0) {
-					
+
 					int previousCount = snack.getCount();
 					snack.setCount(previousCount - 1);
 
@@ -168,26 +192,32 @@ public class VendingMachineCLI {
 
 					if(snack.getSnackType().equals("Candy")) {
 						System.out.println(Candy.dispenseMessage());
+					
 					} else if(snack.getSnackType().equals("Chip")) {
 						System.out.println(Chip.dispenseMessage());
+					
 					} else if(snack.getSnackType().equals("Gum")) {
 						System.out.println(Gum.dispenseMessage());
+					
 					} else if(snack.getSnackType().equals("Drink")) {
 						System.out.println(Drink.dispenseMessage());
 					}
-					
+
 					customerTransaction.totalCost(snack.getSnackPrice());
 
 					System.out.printf("Remaining balance: $" + "%.2f", customerTransaction.balance());
-					
-
 				}
-			} else {
+			
+
+
+			else {
 				System.out.println("Product ID does not exist.");
-				break;
 			}
 		}
+		}
 	}
+
+	
 
 //	public static void auditlog(String message) throws Exception {
 //		try(PurchaseLog log = new PurchaseLog("Log.txt")) {

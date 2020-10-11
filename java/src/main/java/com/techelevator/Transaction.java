@@ -2,10 +2,9 @@ package com.techelevator;
 
 public class Transaction {
 
-	private double moneyProvided;
-	private int quarter = 25;
-	private int dime = 10;
-	private int nickel = 5;
+	private double quarter = .25;
+	private double dime = .10;
+	private double nickel = .05;
 	private double balance;
 	private double totalCost;
 
@@ -34,18 +33,18 @@ public class Transaction {
 	public void makeChange() {
 		while(balance > 0.00) {
 
-			if (balance >= .25) {
-				balance -= .25;
+			if (balance >= quarter) {
+				balance -= quarter;
 				counterQuarter++;
 			}
-			else if (balance >= .10) {
-				balance -= .10;
+			else if (balance >= dime) {
+				balance -= dime;
 				counterDime++;
 			}
-			else if (balance >= .05) {
-				balance -= .05;
+			else if (balance >= nickel) {
+				balance -= nickel;
 				counterNickel++;
-			} else if (balance < .05) {
+			} else if (balance < nickel) {
 				break;
 			}
 		}
