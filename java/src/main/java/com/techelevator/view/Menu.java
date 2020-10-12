@@ -5,8 +5,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import com.techelevator.Transaction;
-
 public class Menu {
 
 	private PrintWriter out;
