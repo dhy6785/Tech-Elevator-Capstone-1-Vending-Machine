@@ -10,5 +10,5 @@ public class Chip extends MenuItems {
 	public static String dispenseMessage() {
 		return "Crunch, Crunch, Yum!";
 	}
-	
+
 }

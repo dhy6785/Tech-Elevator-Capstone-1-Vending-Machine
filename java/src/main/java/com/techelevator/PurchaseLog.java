@@ -8,15 +8,15 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 public class PurchaseLog {
-	
+
 	String path = "Log.txt";
 	File audit = new File(path);
-	
+
 	public PurchaseLog() {
 		String path = "Log.txt";
-		
+
 	}
-	
+
 	public void snackEntry(String snackName, String snackID, double cost, double balance) throws IOException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();
@@ -25,7 +25,7 @@ public class PurchaseLog {
 		writer.println(purchaseLog.toString());
 		writer.close();
 	}
-	
+
 	public void cashEntry(String added, double balance) throws IOException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();
@@ -34,7 +34,7 @@ public class PurchaseLog {
 		writer.println(purchaseLog.toString());
 		writer.close();
 	}
-	
+
 	public void changeEntry(double balance) throws IOException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();

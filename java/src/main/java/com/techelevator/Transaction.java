@@ -41,29 +41,32 @@ public class Transaction {
 				balance -= quarter;
 				counterQuarter++;
 			}
+			
 			else if (balance >= dime) {
 				balance -= dime;
 				counterDime++;
 			}
+			
 			else if (balance >= nickel) {
 				balance -= nickel;
 				counterNickel++;
+			
 			} else if (balance < nickel) {
 				break;
 			}
 		}
-		
+
 		System.out.printf("Your remaining balance: $" + "%.2f", balance);
 		System.out.println("\nHere is your change:");
 		System.out.println("Quarters: " + counterQuarter);
 		System.out.println("Dimes: " + counterDime);
 		System.out.println("Nickels: " + counterNickel);
-		
+
 		try {
 			pLog.changeEntry(balance);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

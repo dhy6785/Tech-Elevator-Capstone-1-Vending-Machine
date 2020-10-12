@@ -8,7 +8,7 @@ public class MenuItems {
 	private double snackPrice;
 	private String snackType;
 	private int count;
-	
+
 
 	//Getters
 	public String getSnackID() {
@@ -30,7 +30,7 @@ public class MenuItems {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
+
 	public MenuItems(String snackID, String snackName, double snackPrice, String snackType) {
 		this.snackID = snackID;
 		this.snackName = snackName;
@@ -38,5 +38,5 @@ public class MenuItems {
 		this.snackType = snackType;
 		this.count = 5;
 	}
-	
+
 }

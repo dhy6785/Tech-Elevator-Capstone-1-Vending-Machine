@@ -1,12 +1,8 @@
 package com.techelevator;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -217,7 +213,7 @@ public class VendingMachineCLI {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				System.out.printf("Remaining balance: $" + "%.2f", customerTransaction.balance());
 			}
 			return;

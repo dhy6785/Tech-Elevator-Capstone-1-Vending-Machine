@@ -10,5 +10,5 @@ public class Drink extends MenuItems {
 	public static String dispenseMessage() {
 		return "Glug, Glug, Yum!";
 	}
-	
+
 }

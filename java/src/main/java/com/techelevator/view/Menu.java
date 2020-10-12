@@ -18,7 +18,7 @@ public class Menu {
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
-			
+
 			displayMenuOptions(options);
 			choice = getChoiceFromUserInput(options);
 		}
@@ -26,7 +26,7 @@ public class Menu {
 	}
 
 
-	
+
 	public Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
 		String userInput = in.nextLine();
@@ -43,11 +43,11 @@ public class Menu {
 		}
 		return choice;
 	}
-	
+
 	public Object getMoneyFromUser(Object[] options) {
 		Object choice = null;
 		String userInput = in.nextLine();
-		
+
 		double amountTendered = 0;
 		try {
 			amountTendered = Double.parseDouble(userInput);
@@ -56,10 +56,10 @@ public class Menu {
 			} else if (amountTendered != 10 && amountTendered != 5 && amountTendered != 2 && amountTendered != 1) {
 				System.out.println("$1, $2, $5 or $10 bills only please");
 			}
-					
+
 		} catch (NumberFormatException ex) {
 			System.out.println("Not a valid bill. Please try again.");
-			
+
 		}
 		return amountTendered;
 	}
