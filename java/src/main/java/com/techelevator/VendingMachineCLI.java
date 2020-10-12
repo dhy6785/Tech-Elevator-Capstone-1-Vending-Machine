@@ -196,11 +196,7 @@ public class VendingMachineCLI {
 				snack.setCount(previousCount - 1);
 
 				System.out.println("You have chosen: " + snack.getSnackName());
-				try {
-					pLog.snackEntry(snack.getSnackName(), snack.getSnackID(), snack.getSnackPrice(), customerTransaction.balance());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
 				if(snack.getSnackType().equals("Candy")) {
 					System.out.println(Candy.dispenseMessage());
 
@@ -216,6 +212,12 @@ public class VendingMachineCLI {
 
 				customerTransaction.totalCost(snack.getSnackPrice());
 
+				try {
+					pLog.snackEntry(snack.getSnackName(), snack.getSnackID(), snack.getSnackPrice(), customerTransaction.balance());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				System.out.printf("Remaining balance: $" + "%.2f", customerTransaction.balance());
 			}
 			return;

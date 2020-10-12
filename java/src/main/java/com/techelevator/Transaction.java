@@ -10,7 +10,6 @@ public class Transaction {
 	private double balance;
 
 	PurchaseLog pLog = new PurchaseLog();
-	double change;
 
 	public Transaction() {
 
@@ -29,6 +28,7 @@ public class Transaction {
 		balance -= cost;
 		return balance;
 	}
+
 
 	int counterQuarter = 0;
 	int counterDime = 0;
@@ -49,10 +49,9 @@ public class Transaction {
 				balance -= nickel;
 				counterNickel++;
 			} else if (balance < nickel) {
+				break;
 			}
 		}
-		
-		change = (counterNickel*.05) + (counterQuarter*.25) + (counterDime*.10);
 		
 		System.out.printf("Your remaining balance: $" + "%.2f", balance);
 		System.out.println("\nHere is your change:");
@@ -61,7 +60,7 @@ public class Transaction {
 		System.out.println("Nickels: " + counterNickel);
 		
 		try {
-			pLog.changeEntry(change, balance);
+			pLog.changeEntry(balance);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

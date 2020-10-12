@@ -35,10 +35,10 @@ public class PurchaseLog {
 		writer.close();
 	}
 	
-	public void changeEntry(double change, double balance) throws IOException {
+	public void changeEntry(double balance) throws IOException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();
-		purchaseLog.append(date + " Change Dispensed: $" + change + " Remaining Balance: $" + balance);
+		purchaseLog.append(date + " Remaining Balance: $" + balance);
 		PrintWriter writer = new PrintWriter(new FileOutputStream(audit, true));
 		writer.println(purchaseLog.toString());
 		writer.close();

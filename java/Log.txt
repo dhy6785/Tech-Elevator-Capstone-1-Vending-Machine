@@ -1,6 +1,23 @@
-Sun Oct 11 20:20:41 EDT 2020 Money Feed: $1.00 Balance: $1.0
-Sun Oct 11 20:20:43 EDT 2020 Money Feed: $2.00 Balance: $3.0
-Sun Oct 11 20:20:44 EDT 2020 Money Feed: $5.00 Balance: $8.0
-Sun Oct 11 20:20:45 EDT 2020 Money Feed: $10.00 Balance: $18.0
-Sun Oct 11 20:20:49 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $18.0
-Sun Oct 11 20:20:52 EDT 2020 Purchased Triplemint D4 $0.75 Balance: $14.95
+Sun Oct 11 20:35:14 EDT 2020 Money Feed: $10.00 Balance: $10.0
+Sun Oct 11 20:35:16 EDT 2020 Money Feed: $10.00 Balance: $20.0
+Sun Oct 11 20:35:17 EDT 2020 Money Feed: $10.00 Balance: $30.0
+Sun Oct 11 20:35:38 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $30.0
+Sun Oct 11 20:35:41 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $26.95
+Sun Oct 11 20:35:44 EDT 2020 Purchased Heavy C4 $1.5 Balance: $23.9
+Sun Oct 11 20:35:47 EDT 2020 Purchased U-Chews D1 $0.85 Balance: $22.4
+Sun Oct 11 20:35:51 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $21.549999999999997
+Sun Oct 11 20:35:53 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $18.499999999999996
+Sun Oct 11 20:35:54 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $15.449999999999996
+Sun Oct 11 20:36:06 EDT 2020 Purchased Cloud Popcorn A4 $3.65 Balance: $12.399999999999995
+Sun Oct 11 20:36:09 EDT 2020 Purchased Cloud Popcorn A4 $3.65 Balance: $8.749999999999995
+Sun Oct 11 20:36:10 EDT 2020 Purchased Cloud Popcorn A4 $3.65 Balance: $5.099999999999994
+Sun Oct 11 20:39:43 EDT 2020 Money Feed: $10.00 Balance: $10.0
+Sun Oct 11 20:39:45 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $10.0
+Sun Oct 11 20:41:34 EDT 2020 Money Feed: $10.00 Balance: $10.0
+Sun Oct 11 20:41:48 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $10.0
+Sun Oct 11 20:44:05 EDT 2020 Money Feed: $10.00 Balance: $10.0
+Sun Oct 11 20:44:08 EDT 2020 Purchased Chiclets D3 $0.75 Balance: $10.0
+Sun Oct 11 20:44:09 EDT 2020 Remaining Balance: $0.0
+Sun Oct 11 20:45:43 EDT 2020 Money Feed: $10.00 Balance: $10.0
+Sun Oct 11 20:45:47 EDT 2020 Purchased Mountain Melter C3 $1.5 Balance: $8.5
+Sun Oct 11 20:45:50 EDT 2020 Remaining Balance: $0.0

@@ -52,21 +52,4 @@ public class MenuItems {
 		this.count = 5;
 	}
 	
-
-	public String soldOut() {
-		String soldOut = "";
-		if(this.getCount() == 0) {
-			soldOut = "SOLD OUT";
-		}
-		return soldOut;
-	}
-	
-	
-
-	
-
-
-		
-
-	
 }
