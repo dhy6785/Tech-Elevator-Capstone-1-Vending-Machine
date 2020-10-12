@@ -89,10 +89,10 @@ public class VendingMachineCLI {
 					System.out.println("\n*************");
 					System.out.println("PURCHASE MENU");
 					System.out.println("*************");
-					
+
 					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
-					
-					
+
+
 					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 						String feedChoice = (String) menu.getChoiceFromOptions(FEED_MENU_OPTIONS);
 						if (feedChoice.equals(FEED_ONE_DOLLAR)) {
@@ -138,23 +138,19 @@ public class VendingMachineCLI {
 						printInventory(readItems);
 						productSelect(readItems);
 
-
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 
 						customerTransaction.makeChange();
 						break;
 					}
-					
 				}
-
-				
-				
 			} else if (choice.contentEquals(MAIN_MENU_OPTION_EXIT)) {
 				isRunning = false;
 				System.out.println("Have a nice day!");
 			}
 		}
 	}
+
 
 	private static void printInventory(List<MenuItems> snackSupply) {
 
@@ -164,66 +160,67 @@ public class VendingMachineCLI {
 
 	}
 
+
 	private void productSelect(List<MenuItems> snackSupply) {
 
 		System.out.print("\nPlease select product ID >>> ");
 		String productChoice = productScanner.nextLine();
+		MenuItems snack = null;
 
+		for(MenuItems singleSnack : snackSupply) {
 
-		for(MenuItems snack : snackSupply) {
-
-			if(snack.getSnackID().equalsIgnoreCase(productChoice)) {
-
-				if(snack.getSnackPrice() > customerTransaction.balance()) {
-					System.out.println("Feed more money.");
-					break;
-				}
-
-				if(snack.getCount() == 0) {
-					System.out.println("Item out of stock.");
-					//					break;
-
-				} else if(snack.getCount() > 0) {
-
-					int previousCount = snack.getCount();
-					snack.setCount(previousCount - 1);
-
-					System.out.println("You have chosen: " + snack.getSnackName());
-
-					if(snack.getSnackType().equals("Candy")) {
-						System.out.println(Candy.dispenseMessage());
-					
-					} else if(snack.getSnackType().equals("Chip")) {
-						System.out.println(Chip.dispenseMessage());
-					
-					} else if(snack.getSnackType().equals("Gum")) {
-						System.out.println(Gum.dispenseMessage());
-					
-					} else if(snack.getSnackType().equals("Drink")) {
-						System.out.println(Drink.dispenseMessage());
-					}
-
-					customerTransaction.totalCost(snack.getSnackPrice());
-
-					System.out.printf("Remaining balance: $" + "%.2f", customerTransaction.balance());
-				}
-			
-
-
-			else {
-				System.out.println("Product ID does not exist.");
+			if(singleSnack.getSnackID().equalsIgnoreCase(productChoice)) {
+				snack = singleSnack;
+				break;
 			}
 		}
+
+		if(snack == null) {
+			System.out.println("Product does not exist");
+			return;
+		}
+
+		if(snack.getSnackPrice() > customerTransaction.balance()) {
+			System.out.println("Feed more money.");
+			return;
+		}
+
+		if(snack.getSnackID().equalsIgnoreCase(productChoice)) {
+
+			if(snack.getCount() == 0) {
+				System.out.println("Item out of stock.");
+
+			} else if(snack.getCount() > 0) {
+
+				int previousCount = snack.getCount();
+				snack.setCount(previousCount - 1);
+
+				System.out.println("You have chosen: " + snack.getSnackName());
+				try {
+					pLog.snackEntry(snack.getSnackName(), snack.getSnackID(), snack.getSnackPrice(), customerTransaction.balance());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				if(snack.getSnackType().equals("Candy")) {
+					System.out.println(Candy.dispenseMessage());
+
+				} else if(snack.getSnackType().equals("Chip")) {
+					System.out.println(Chip.dispenseMessage());
+
+				} else if(snack.getSnackType().equals("Gum")) {
+					System.out.println(Gum.dispenseMessage());
+
+				} else if(snack.getSnackType().equals("Drink")) {
+					System.out.println(Drink.dispenseMessage());
+				}
+
+				customerTransaction.totalCost(snack.getSnackPrice());
+
+				System.out.printf("Remaining balance: $" + "%.2f", customerTransaction.balance());
+			}
+			return;
 		}
 	}
-
-	
-
-//	public static void auditlog(String message) throws Exception {
-//		try(PurchaseLog log = new PurchaseLog("Log.txt")) {
-//			log.write(LocalDate.now() + " " + LocalTime.now() + " " + message);
-//		}
-//	}
 
 
 

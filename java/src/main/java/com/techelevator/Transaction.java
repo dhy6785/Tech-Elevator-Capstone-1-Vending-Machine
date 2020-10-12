@@ -1,12 +1,16 @@
 package com.techelevator;
 
+import java.io.IOException;
+
 public class Transaction {
 
 	private double quarter = .25;
 	private double dime = .10;
 	private double nickel = .05;
 	private double balance;
-	private double totalCost;
+
+	PurchaseLog pLog = new PurchaseLog();
+	double change;
 
 	public Transaction() {
 
@@ -45,13 +49,22 @@ public class Transaction {
 				balance -= nickel;
 				counterNickel++;
 			} else if (balance < nickel) {
-				break;
 			}
 		}
+		
+		change = (counterNickel*.05) + (counterQuarter*.25) + (counterDime*.10);
+		
 		System.out.printf("Your remaining balance: $" + "%.2f", balance);
 		System.out.println("\nHere is your change:");
 		System.out.println("Quarters: " + counterQuarter);
 		System.out.println("Dimes: " + counterDime);
 		System.out.println("Nickels: " + counterNickel);
+		
+		try {
+			pLog.changeEntry(change, balance);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

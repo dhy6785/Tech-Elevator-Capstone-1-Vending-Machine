@@ -1,0 +1,6 @@
+Sun Oct 11 20:20:41 EDT 2020 Money Feed: $1.00 Balance: $1.0
+Sun Oct 11 20:20:43 EDT 2020 Money Feed: $2.00 Balance: $3.0
+Sun Oct 11 20:20:44 EDT 2020 Money Feed: $5.00 Balance: $8.0
+Sun Oct 11 20:20:45 EDT 2020 Money Feed: $10.00 Balance: $18.0
+Sun Oct 11 20:20:49 EDT 2020 Purchased Potato Crisps A1 $3.05 Balance: $18.0
+Sun Oct 11 20:20:52 EDT 2020 Purchased Triplemint D4 $0.75 Balance: $14.95

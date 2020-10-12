@@ -14,34 +14,33 @@ public class PurchaseLog {
 	
 	public PurchaseLog() {
 		String path = "Log.txt";
-		File f = new File(path);
 		
 	}
 	
-	public void snackEntry(String snackName, String snackID, String cost, String balance) throws IOException {
+	public void snackEntry(String snackName, String snackID, double cost, double balance) throws IOException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();
-		purchaseLog.append(date + " Purchased " + snackName + " " + snackID + " " + cost + " Balance" + balance);
+		purchaseLog.append(date + " Purchased " + snackName + " " + snackID + " $" + cost + " Balance: $" + balance);
 		PrintWriter writer = new PrintWriter(new FileOutputStream(audit, true));
-		writer.append(purchaseLog.toString());
-		
+		writer.println(purchaseLog.toString());
+		writer.close();
 	}
 	
 	public void cashEntry(String added, double balance) throws IOException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();
-		// need variable
-		purchaseLog.append(date + " Cash tendered");
+		purchaseLog.append(date + " Money Feed: $" + added + " Balance: $" + balance);
 		PrintWriter writer = new PrintWriter(new FileOutputStream(audit, true));
-		writer.append(purchaseLog.toString());
+		writer.println(purchaseLog.toString());
+		writer.close();
 	}
 	
-	public void changeEntry(String change, String balance) throws IOException {
+	public void changeEntry(double change, double balance) throws IOException {
 		Date date = java.util.Calendar.getInstance().getTime();
 		StringBuilder purchaseLog = new StringBuilder();
-		// need variable
-		purchaseLog.append(date + " Change dispensed");
+		purchaseLog.append(date + " Change Dispensed: $" + change + " Remaining Balance: $" + balance);
 		PrintWriter writer = new PrintWriter(new FileOutputStream(audit, true));
-		writer.append(purchaseLog.toString());
+		writer.println(purchaseLog.toString());
+		writer.close();
 	}
 }
