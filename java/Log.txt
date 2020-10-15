@@ -21,3 +21,13 @@ Sun Oct 11 20:44:09 EDT 2020 Remaining Balance: $0.0
 Sun Oct 11 20:45:43 EDT 2020 Money Feed: $10.00 Balance: $10.0
 Sun Oct 11 20:45:47 EDT 2020 Purchased Mountain Melter C3 $1.5 Balance: $8.5
 Sun Oct 11 20:45:50 EDT 2020 Remaining Balance: $0.0
+Wed Oct 14 15:05:10 EDT 2020 Money Feed: $1.00 Balance: $1.0
+Wed Oct 14 15:05:31 EDT 2020 Money Feed: $2.00 Balance: $3.0
+Wed Oct 14 15:05:35 EDT 2020 Money Feed: $1.00 Balance: $4.0
+Wed Oct 14 15:05:54 EDT 2020 Purchased U-Chews D1 $0.85 Balance: $3.15
+Wed Oct 14 15:06:02 EDT 2020 Purchased U-Chews D1 $0.85 Balance: $2.3
+Wed Oct 14 15:06:08 EDT 2020 Purchased U-Chews D1 $0.85 Balance: $1.4499999999999997
+Wed Oct 14 15:06:14 EDT 2020 Purchased U-Chews D1 $0.85 Balance: $0.5999999999999998
+Wed Oct 14 15:06:26 EDT 2020 Money Feed: $1.00 Balance: $1.5999999999999996
+Wed Oct 14 15:06:32 EDT 2020 Purchased U-Chews D1 $0.85 Balance: $0.7499999999999997
+Wed Oct 14 15:06:42 EDT 2020 Remaining Balance: $0.049999999999999656

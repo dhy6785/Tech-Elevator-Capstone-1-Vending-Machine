@@ -72,9 +72,33 @@ public class VendingMachineCLI {
 
 		boolean isRunning = true;
 		while (isRunning) {
-			System.out.println("\n*********");
-			System.out.println("MAIN MENU");
-			System.out.println("*********");
+
+			System.out.println("                __________                ");
+			System.out.println("         ______/ ________ \\______        ");
+			System.out.println("       _/      ____________      \\_      ");
+			System.out.println("     _/____________    ____________\\_    ");
+			System.out.println("    /  ___________ \\  / ___________  \\  ");
+			System.out.println("   /  /XXXXXXXXXXX\\ \\/ /XXXXXXXXXXX\\  \\   ");
+			System.out.println("  /  /############/    \\############\\  \\  ");
+			System.out.println("  |  \\XXXXXXXXXXX/ _  _ \\XXXXXXXXXXX/  |  ");
+			System.out.println("__|\\_____   ___   //  \\\\   ___   _____/|__");
+			System.out.println("[_       \\     \\  X    X  /     /       _]");
+			System.out.println("__|     \\ \\                    / /     |__");
+			System.out.println("[____  \\ \\ \\   ____________   / / /  ____]");
+			System.out.println("     \\  \\ \\ \\/||.||.||.||.||\\/ / /  /     ");
+			System.out.println("      \\_ \\ \\  ||.||.||.||.||  / / _/      ");
+			System.out.println("        \\ \\   ||.||.||.||.||   / /        ");
+			System.out.println("         \\_   ||_||_||_||_||   _/         ");
+			System.out.println("           \\     ........     /           ");
+			System.out.println("            \\________________/");
+			System.out.println("\n       _   _   _   _   _   _   _   _");  
+			System.out.println("      / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\ "); 
+			System.out.println("     ( V | E | N | D | R | O | I | D )"); 
+			System.out.println("      \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ ");
+			
+			System.out.println("\n*******************************************");
+			System.out.println("          M  A  I  N   M  E  N  U");
+			System.out.println("*******************************************");
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				printInventory(readItems);
@@ -82,9 +106,9 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 
 				while(true) {
-					System.out.println("\n*************");
-					System.out.println("PURCHASE MENU");
-					System.out.println("*************");
+					System.out.println("\n*******************************************");
+					System.out.println("   P  U  R  C  H  A  S  E    M  E  N  U");
+					System.out.println("*******************************************");
 
 					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
